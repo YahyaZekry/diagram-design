@@ -20,9 +20,9 @@ Forty visual types. Semantic patterns describe behavior independently; type refe
 
 Don't silently ship default-skinned diagrams into a branded project.
 
-First resolve any project `.diagram-design` marker per [`references/profiles.md`](references/profiles.md); that reference owns profile selection, failures, the protected default, and save behavior.
+First resolve any project `.diagram-design` marker per [`references/profiles.md`](references/profiles.md); a successfully resolved marker selects its profile and bypasses this gate. That reference owns failures, the protected default, and save behavior.
 
-Open [`references/style-guide.md`](references/style-guide.md). If it still has the shipped paper, ink, and accent tokens, **pause and present the choices from [`references/onboarding.md`](references/onboarding.md)**, then follow the selected method; saved profiles route to `references/profiles.md`.
+For a markerless project, open [`references/style-guide.md`](references/style-guide.md). If it still has the shipped paper, ink, and accent tokens, **pause and present the choices from [`references/onboarding.md`](references/onboarding.md)**, then follow the selected method; saved profiles route to `references/profiles.md`.
 
 After customization or an explicit default choice, skip this gate. Detect and save active/custom profiles exactly as `references/profiles.md` specifies.
 

@@ -136,7 +136,7 @@ Use one primary pattern per figure. A second pattern may supply at most one supp
 
 **Selection triggers:** One subject advances through a small set of named phases, while waits, retries, cancellation, recovery, and terminal outcomes are as important as the happy path. Use this for the subject's lifecycle, not for messages exchanged between actors.
 
-**Required primitives:** A left-to-right primary phase rail; 4–5 ordered phase states; a separate interruption/recovery band for waits or retries; a separate terminal-outcome band; labeled transitions; distinct terminal states for cancellation and failure when both can occur. Start and end markers follow the State Machine reference.
+**Required primitives:** A left-to-right primary phase rail; 4–5 ordered phase states; a separate interruption/recovery band for waits or retries; a separate terminal-outcome band; labeled transitions; distinct terminal state boxes for cancellation and failure when both can occur. Those labeled boxes are sufficient terminal outcomes; optional start/end pseudo-state markers follow the State Machine reference and count toward the transition budget.
 
 **Complexity budget:** 4–5 primary phases, ≤2 supporting wait/recovery states, ≤2 terminal states, ≤9 states, and ≤10 transitions. Split lifecycle overview from dense guard logic once either ceiling is reached.
 
