@@ -28,7 +28,7 @@ Open [`references/style-guide.md`](references/style-guide.md) and check the defa
 
 Then branch per the matching section of [`references/onboarding.md`](references/onboarding.md); for **(f)** follow [`references/profiles.md`](references/profiles.md).
 
-**Unattended runs:** if the user is not reachable (autonomous session, batch run), do not block on the gate — take the explicit-default path **(e)**, note the choice beside the deliverable, and move on. The gate exists to start a conversation, not to stall one.
+**Unattended runs:** if the user is not reachable (autonomous session, batch run), do not block on the gate — take the explicit-default path **(e)**, and state beside the deliverable that the shipped default skin was used and can be restyled to the project's brand on request. The gate exists to start a conversation, not to stall one; the stated flag keeps the default from being silent.
 
 **Once the style guide has been customized** (or the user explicitly chose default), skip this gate on later runs. A leading profile header names the copied-in active profile. Without a header, any semantic-role value or typography family differing from shipped defaults means **custom-unsaved**: skip the gate and offer to save it as a profile. All-default tokens with no marker/header trigger the gate. After onboarding, offer to save as a named client profile per `references/profiles.md`.
 
@@ -333,7 +333,7 @@ Rules:
 - Never `writing-mode` vertical.
 - For vertical segments, place the label to the side (not on the line) with the same 6–10px horizontal gap.
 
-**Text metrics under font substitution.** You are your own layout engine, and text width is where hand-authored SVG fails. Size masks, chips, and boxes from worst-case metrics, not optimistic ones: budget **≥0.55× font-size per character** for Geist Mono labels (≈5px/char at 9px — the commonly-estimated 4.2px/char overflows on real renders). Previews via `rsvg`/`inkscape` cannot fetch the Google Fonts the export injects, so a preview renders in a substituted font — geometry must survive that substitution: generous padding is the defense, and `scripts/verify-geometry.py` in this repo is the check.
+**Text metrics under font substitution.** You are your own layout engine, and text width is where hand-authored SVG fails. The width budget in `references/style-guide.md` (0.60em sans / 0.62em mono per character) is calibrated to the shipped Geist faces and fits them exactly — it carries no slack, and a substituted font breaks that assumption: previews via `rsvg`/`inkscape` cannot fetch the injected Google Fonts, and stand-ins commonly run wider. Under substitution, budget **≥0.7em per character for mono labels** (the ~4.2px/char ≈ 0.47em estimate that overflowed twice in one production run is the trap), lean on generous padding, and hold the budget yourself — `scripts/verify-geometry.py` catches masks clipped by later-painted nodes, not text fit.
 
 ### Legend — horizontal strip at the bottom
 
