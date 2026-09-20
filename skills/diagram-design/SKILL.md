@@ -28,6 +28,8 @@ Open [`references/style-guide.md`](references/style-guide.md) and check the defa
 
 Then branch per the matching section of [`references/onboarding.md`](references/onboarding.md); for **(f)** follow [`references/profiles.md`](references/profiles.md).
 
+**Unattended runs:** if the user is not reachable (autonomous session, batch run), do not block on the gate — take the explicit-default path **(e)**, note the choice beside the deliverable, and move on. The gate exists to start a conversation, not to stall one.
+
 **Once the style guide has been customized** (or the user explicitly chose default), skip this gate on later runs. A leading profile header names the copied-in active profile. Without a header, any semantic-role value or typography family differing from shipped defaults means **custom-unsaved**: skip the gate and offer to save it as a profile. All-default tokens with no marker/header trigger the gate. After onboarding, offer to save as a named client profile per `references/profiles.md`.
 
 ---
@@ -330,6 +332,8 @@ Rules:
 - **Mandatory 6–10px gap** between the bottom of the mask rect and the arrow stroke. The connector must remain visible — a label that hides its own arrow is a hard fail.
 - Never `writing-mode` vertical.
 - For vertical segments, place the label to the side (not on the line) with the same 6–10px horizontal gap.
+
+**Text metrics under font substitution.** You are your own layout engine, and text width is where hand-authored SVG fails. Size masks, chips, and boxes from worst-case metrics, not optimistic ones: budget **≥0.55× font-size per character** for Geist Mono labels (≈5px/char at 9px — the commonly-estimated 4.2px/char overflows on real renders). Previews via `rsvg`/`inkscape` cannot fetch the Google Fonts the export injects, so a preview renders in a substituted font — geometry must survive that substitution: generous padding is the defense, and `scripts/verify-geometry.py` in this repo is the check.
 
 ### Legend — horizontal strip at the bottom
 
