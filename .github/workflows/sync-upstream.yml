@@ -1,9 +1,7 @@
 name: Sync fork with upstream
 
-# Keeps this fork current with cathrynlavery/diagram-design.
-# Note: GitHub sometimes disables scheduled workflows in forks — if the
-# schedule doesn't fire, enable Actions for the fork, or run this once from
-# the Actions tab (workflow_dispatch).
+# Kept in the fork after each upstream merge.  SYNC_PAT needs both repository
+# contents and workflow write access because upstream can change workflow files.
 on:
   schedule:
     - cron: "23 4 * * *"
@@ -23,6 +21,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.SYNC_PAT }}
 
       - name: Merge upstream into fork
         run: |
