@@ -1,14 +1,13 @@
 name: Sync fork with upstream
 
-# Kept in the fork after each upstream merge.  SYNC_PAT needs both repository
-# contents and workflow write access because upstream can change workflow files.
+# Kept in the fork after each upstream merge. SYNC_PAT lives in the fork-sync
+# environment and has workflow write access because upstream can change workflow files.
 on:
   schedule:
     - cron: "23 4 * * *"
   workflow_dispatch: {}
 
-permissions:
-  contents: write
+permissions: {}
 
 concurrency:
   group: sync-fork
@@ -16,12 +15,16 @@ concurrency:
 
 jobs:
   sync:
+    environment: fork-sync
     runs-on: ubuntu-latest
+    # Checkout only needs read access; the environment-scoped PAT performs the final push.
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
           fetch-depth: 0
-          token: ${{ secrets.SYNC_PAT }}
+          persist-credentials: false
 
       - name: Merge upstream into fork
         run: |
@@ -38,4 +41,11 @@ jobs:
           fi
 
           git merge --no-edit upstream/main
+
+          clean_remote="https://github.com/${GITHUB_REPOSITORY}.git"
+          trap 'git remote set-url origin "$clean_remote"' EXIT
+          git remote set-url origin \
+            "https://x-access-token:${SYNC_PAT}@github.com/${GITHUB_REPOSITORY}.git"
           git push origin HEAD:main
+        env:
+          SYNC_PAT: ${{ secrets.SYNC_PAT }}

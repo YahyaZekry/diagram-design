@@ -78,7 +78,8 @@ jobs:
 
   python39-compat:
     name: Python 3.9 Compatibility
-    runs-on: ubuntu-latest
+    # Python 3.9 is unavailable on Ubuntu 26.04, the current ubuntu-latest.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
