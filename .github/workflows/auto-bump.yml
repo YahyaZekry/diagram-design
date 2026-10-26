@@ -161,6 +161,7 @@ jobs:
     needs: prepare
     if: needs.prepare.outputs.should_bump == 'true'
     runs-on: ubuntu-latest
+    environment: fork-sync
     timeout-minutes: 5
     permissions:
       contents: read
